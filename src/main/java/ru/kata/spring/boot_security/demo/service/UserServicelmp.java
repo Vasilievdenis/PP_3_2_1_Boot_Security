@@ -29,10 +29,12 @@ public class UserServicelmp implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public User getUser(int id) {
-
+    public User getUser(Integer id) {
         return userDao.getUser(id);
     }
+
+
+
 
 
     @Override
@@ -48,9 +50,8 @@ public class UserServicelmp implements UserService {
 
     }
 
-
     @Override
-    public void removeUser(int id) {
+    public void removeUser(Integer id) {
         userDao.removeUser(id);
 
     }

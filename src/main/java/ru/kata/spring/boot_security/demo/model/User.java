@@ -12,8 +12,8 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@EqualsAndHashCode
 @Table(name = "users")
+@EqualsAndHashCode
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,11 +48,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Override
@@ -108,11 +108,11 @@ public class User implements UserDetails {
         this.lastname = lastname;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -133,5 +133,32 @@ public class User implements UserDetails {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (age != user.age) return false;
+        if (!name.equals(user.name)) return false;
+        if (!lastname.equals(user.lastname)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!password.equals(user.password)) return false;
+        return roles.equals(user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + lastname.hashCode();
+        result = 31 * result + age;
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + roles.hashCode();
+        return result;
+    }
 }
 

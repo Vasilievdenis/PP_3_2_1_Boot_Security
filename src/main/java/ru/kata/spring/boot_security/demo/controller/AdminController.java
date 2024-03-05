@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
@@ -38,8 +39,17 @@ public class AdminController {
         return "users";
     }
 
+    @GetMapping("/new")
+    public String CreateUserForm(ModelMap model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        Collection<Role> roles = roleService.getRoles();
+        model.addAttribute("role", roles);
+        return "userCreate";
+    }
+
     @PostMapping("/")
-    public String addUser(@ModelAttribute("user") User user, ModelMap model) {
+    public String addUser(@ModelAttribute("user") @Valid User user, ModelMap model) {
         model.addAttribute("roles", roleService.getRoles());
         userService.addUser(user);
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -48,29 +58,25 @@ public class AdminController {
         return "redirect:/admin/";
     }
 
-    @PostMapping("/{id}/update")
-    public String updateUser(@ModelAttribute("user") User user) {
+
+
+
+    @GetMapping("/{id}/update")
+    public String getEditUserForm(Model model, @PathVariable("id") Integer id) {
+        model.addAttribute("user", userService.getUser(id));
+        return "userUpdate";
+    }
+
+    @PatchMapping("/{id}")
+    public String saveUpdateUser(@ModelAttribute("user") @Valid User user, @PathVariable("id") Integer id) {
         userService.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/admin/";
     }
 
     @DeleteMapping("/{id}")
-    public String removeUsers(@PathVariable("id") int id) {
+    public String removeUser(@PathVariable("id") Integer id) {
         userService.removeUser(id);
-        return "redirect:/admin";
-    }
-    @GetMapping("/{id}/update")
-    public String getEditUserForm(Model model, @PathVariable("id") int id) {
-        model.addAttribute(userService.getUser(id));
-        return "userUpdate";
-    }
-    @GetMapping("/new")
-    public String createUserForm(ModelMap model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        Collection<Role> roles = roleService.getRoles();
-        model.addAttribute("role", roles);
-        return "userCreate";
+        return "redirect:/admin/";
     }
 }
 

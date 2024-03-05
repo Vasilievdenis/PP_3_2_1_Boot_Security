@@ -23,7 +23,7 @@ public class UserController {
 
 
     @GetMapping("/user")
-    public String userPage(Model model, Principal principal) {
+    public String userpage(Model model, Principal principal) {
         User user = userDaolmp.findByUserName(principal.getName());
         model.addAttribute("user", user);
         return "user";

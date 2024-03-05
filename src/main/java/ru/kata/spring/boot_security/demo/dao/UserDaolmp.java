@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.dao;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -12,14 +13,8 @@ import java.util.List;
 @Repository
 public class UserDaolmp implements UserDao {
 
-    private EntityManager entityManager;
-
     @PersistenceContext
-    public void setEntityManager (EntityManager entityManager) {
-
-        this.entityManager = entityManager;
-    }
-
+    private EntityManager entityManager;
 
     @Override
     public List<User> getUsers() {
@@ -55,7 +50,9 @@ public class UserDaolmp implements UserDao {
     public User findByUserName(String name) {
         String query = "select u from User u left join fetch u.roles where u.name=:name";
         User user = entityManager.createQuery(query, User.class).setParameter("name", name).getSingleResult();
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + name + " not found");
+        }
         return user;
     }
-
 }
