@@ -23,7 +23,7 @@ public class UserDaolmp implements UserDao {
     }
 
     @Override
-    public User getUser(int id) {
+    public User getUser(Integer id) {
 
         return entityManager.find(User.class, id);
     }
@@ -40,11 +40,6 @@ public class UserDaolmp implements UserDao {
 
     }
 
-    @Override
-    public void removeUser(int id) {
-        entityManager.remove(getUser(id));
-
-    }
 
 
     public User findByUserName(String name) {
@@ -54,5 +49,10 @@ public class UserDaolmp implements UserDao {
             throw new UsernameNotFoundException("User " + name + " not found");
         }
         return user;
+    }
+
+    @Override
+    public void removeUser(Integer id) {
+        entityManager.remove(getUser(id));
     }
 }

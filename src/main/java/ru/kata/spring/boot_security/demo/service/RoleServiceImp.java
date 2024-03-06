@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
 import ru.kata.spring.boot_security.demo.model.Role;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoleServiceImp implements RoleService {
-    public RoleDao roleDao;
+    private final RoleDao roleDao;
 
     @Autowired
     public RoleServiceImp (RoleDao roleDao) {
@@ -18,10 +18,8 @@ public class RoleServiceImp implements RoleService {
     }
 
 
-
-
     @Override
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roleDao.getRoles();
     }
 }
