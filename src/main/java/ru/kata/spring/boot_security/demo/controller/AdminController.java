@@ -14,8 +14,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,7 +33,7 @@ public class AdminController {
     public String getUsers(Model model, Principal principal) {
         User user = userService.findByUserName(principal.getName());
                 model.addAttribute("user", user);
-                List<User> list = userService.getUsers();
+                Set<User> list = userService.getUsers();
                 model.addAttribute("list", list);
         return "users";
     }
@@ -43,7 +42,7 @@ public class AdminController {
     public String CreateUserForm(ModelMap model) {
         User user = new User();
         model.addAttribute("user", user);
-        Collection<Role> roles = roleService.getRoles();
+        Set<Role> roles = roleService.getRoles();
         model.addAttribute("role", roles);
         return "userCreate";
     }

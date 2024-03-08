@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.User;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -22,7 +22,7 @@ public class UserServicelmp implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
 
         return userDao.getUsers();
     }
@@ -32,9 +32,6 @@ public class UserServicelmp implements UserService {
     public User getUser(Integer id) {
         return userDao.getUser(id);
     }
-
-
-
 
 
     @Override

@@ -4,23 +4,33 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Repository
 public class UserDaolmp implements UserDao {
 
-    @PersistenceContext
+
     private EntityManager entityManager;
 
-    @Override
-    public List<User> getUsers() {
+    @PersistenceContext
+    public void setEntityManager (EntityManager entityManager) {
 
-        return entityManager.createQuery("from User", User.class).getResultList();
+        this.entityManager = entityManager;
     }
+
+
+    @Override
+    public Set<User> getUsers() {
+
+        return entityManager.createQuery("from User", User.class).getResultStream().collect(Collectors.toSet());
+    }
+
+
 
     @Override
     public User getUser(Integer id) {
@@ -28,11 +38,13 @@ public class UserDaolmp implements UserDao {
         return entityManager.find(User.class, id);
     }
 
+
     @Override
     public void addUser(User user) {
         entityManager.persist(user);
 
     }
+
 
     @Override
     public void updateUser(User user) {
@@ -40,6 +52,10 @@ public class UserDaolmp implements UserDao {
 
     }
 
+    @Override
+    public void removeUser(Integer id) {
+        entityManager.remove(getUser(id));
+    }
 
 
     public User findByUserName(String name) {
@@ -51,8 +67,4 @@ public class UserDaolmp implements UserDao {
         return user;
     }
 
-    @Override
-    public void removeUser(Integer id) {
-        entityManager.remove(getUser(id));
-    }
 }

@@ -1,17 +1,13 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
-
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -22,13 +18,13 @@ public class User {
     private int id;
     @Column(name = "name")
     private String name;
-    @Column (name = "lastname")
+    @Column(name = "lastname")
     private String lastname;
-    @Column (name = "age")
+    @Column(name = "age")
     private int age;
-    @Column (name = "email")
+    @Column(name = "email")
     private String email;
-    @Column (name = "password")
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -149,6 +145,7 @@ public class User {
     @Override
     public int hashCode() {
         int result = id;
+        result = 31 * result + lastname.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + lastname.hashCode();
         result = 31 * result + age;
