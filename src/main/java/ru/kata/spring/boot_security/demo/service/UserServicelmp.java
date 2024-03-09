@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
@@ -11,13 +12,15 @@ import java.util.Set;
 @Service
 @Transactional
 public class UserServicelmp implements UserService {
-    public UserDao userDao;
+    private final UserDao userDao;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public UserServicelmp(UserDao userDao) {
+    public UserServicelmp(UserDao userDao, PasswordEncoder passwordEncoder) {
 
         this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional(readOnly = true)
@@ -29,10 +32,10 @@ public class UserServicelmp implements UserService {
 
     @Transactional(readOnly = true)
     @Override
+
     public User getUser(Integer id) {
         return userDao.getUser(id);
     }
-
 
     @Override
     public void addUser(User user) {
@@ -57,6 +60,4 @@ public class UserServicelmp implements UserService {
     public User findByUserName(String name) {
         return userDao.findByUserName(name);
     }
-
-
 }

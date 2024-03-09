@@ -6,4 +6,8 @@ import java.util.Set;
 
 public interface RoleService {
     Set<Role> getRoles();
+
+    void addRole(Role role);
+
+
 }

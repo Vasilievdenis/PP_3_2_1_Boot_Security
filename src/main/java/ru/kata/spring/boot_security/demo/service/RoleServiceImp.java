@@ -13,7 +13,7 @@ public class RoleServiceImp implements RoleService {
     private final RoleDao roleDao;
 
     @Autowired
-    public RoleServiceImp (RoleDao roleDao) {
+    public RoleServiceImp(RoleDao roleDao) {
         this.roleDao = roleDao;
     }
 
@@ -21,5 +21,10 @@ public class RoleServiceImp implements RoleService {
     @Override
     public Set<Role> getRoles() {
         return roleDao.getRoles();
+    }
+
+    @Override
+    public void addRole(Role role) {
+        roleDao.addRole(role);
     }
 }

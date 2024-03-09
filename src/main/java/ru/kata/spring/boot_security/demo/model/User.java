@@ -1,17 +1,16 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,19 +139,11 @@ public class User {
         if (!email.equals(user.email)) return false;
         if (!password.equals(user.password)) return false;
         return roles.equals(user.roles);
+
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + lastname.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + lastname.hashCode();
-        result = 31 * result + age;
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + roles.hashCode();
-        return result;
+        return Objects.hash(id, age, password, email, lastname, roles);
     }
 }
-

@@ -1,12 +1,11 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@EqualsAndHashCode
 @Table(name = "roles")
 public class Role {
     @Id
@@ -21,23 +20,26 @@ public class Role {
 
     }
 
-    
 
     public Set<User> getUsers() {
         return users;
     }
+
     public String getName() {
         return name;
     }
+
     public String setName(String name) {
         return this.name = name;
     }
-public Integer getId(){
+
+    public Integer getId() {
         return id;
-}
-public void setId(Integer id) {
+    }
+
+    public void setId(Integer id) {
         this.id = id;
-}
+    }
 
 
     @Override
@@ -54,9 +56,8 @@ public void setId(Integer id) {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + users.hashCode();
-        return result;
+        return Objects.hash(id, name);
     }
 }
+
+

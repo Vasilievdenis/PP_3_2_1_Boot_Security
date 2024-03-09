@@ -32,9 +32,9 @@ public class AdminController {
     @GetMapping(value = "/")
     public String getUsers(Model model, Principal principal) {
         User user = userService.findByUserName(principal.getName());
-                model.addAttribute("user", user);
-                Set<User> list = userService.getUsers();
-                model.addAttribute("list", list);
+        model.addAttribute("user", user);
+        Set<User> list = userService.getUsers();
+        model.addAttribute("list", list);
         return "users";
     }
 
@@ -56,8 +56,6 @@ public class AdminController {
         userService.updateUser(user);
         return "redirect:/admin/";
     }
-
-
 
 
     @GetMapping("/{id}/update")

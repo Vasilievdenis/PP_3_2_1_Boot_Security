@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.Set;
@@ -17,11 +18,64 @@ public class CustomUserDetails extends User implements UserDetails {
     public Set<? extends GrantedAuthority> getAuthorities() {
         return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
     }
+
     @Override
     public String getPassword() {
-        return null; }
+        return null;
+    }
+
     @Override
     public String getUsername() {
         return null;
+    }
+
+    @Override
+    public Integer getId() {
+        return super.getId();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public Integer getAge() {
+        return super.getAge();
+    }
+
+    @Override
+    public String getEmail() {
+        return super.getEmail();
+    }
+
+    @Override
+    public Set<Role> getRoles() {
+        return super.getRoles();
+    }
+
+    @Override
+    public String getLastname() {
+        return super.getLastname();
     }
 }

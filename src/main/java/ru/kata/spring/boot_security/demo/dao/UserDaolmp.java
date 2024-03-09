@@ -6,7 +6,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ public class UserDaolmp implements UserDao {
     private EntityManager entityManager;
 
     @PersistenceContext
-    public void setEntityManager (EntityManager entityManager) {
+    public void setEntityManager(EntityManager entityManager) {
 
         this.entityManager = entityManager;
     }
@@ -29,7 +28,6 @@ public class UserDaolmp implements UserDao {
 
         return entityManager.createQuery("from User", User.class).getResultStream().collect(Collectors.toSet());
     }
-
 
 
     @Override
@@ -58,6 +56,7 @@ public class UserDaolmp implements UserDao {
     }
 
 
+    @Override
     public User findByUserName(String name) {
         String query = "select u from User u left join fetch u.roles where u.name=:name";
         User user = entityManager.createQuery(query, User.class).setParameter("name", name).getSingleResult();
