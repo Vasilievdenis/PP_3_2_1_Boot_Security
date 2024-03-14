@@ -3,6 +3,7 @@ package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
 import ru.kata.spring.boot_security.demo.model.Role;
 
@@ -19,7 +20,13 @@ public class RoleServiceImp implements RoleService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Role> getRoles() {
+        return roleDao.getRoles();
+    }
+
+    @Override
+    public Set<Role> findById(Integer id) {
         return roleDao.getRoles();
     }
 
@@ -27,4 +34,6 @@ public class RoleServiceImp implements RoleService {
     public void addRole(Role role) {
         roleDao.addRole(role);
     }
+
+
 }

@@ -30,7 +30,7 @@ public class AdminController {
 
 
     @GetMapping(value = "/")
-    public String getUsers(Model model, Principal principal) {
+    public String getUsers(ModelMap model, Principal principal) {
         User user = userService.findByUserName(principal.getName());
         model.addAttribute("user", user);
         Set<User> list = userService.getUsers();
@@ -39,7 +39,7 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String CreateUserForm(ModelMap model) {
+    public String createUserForm(ModelMap model) {
         User user = new User();
         model.addAttribute("user", user);
         Set<Role> roles = roleService.getRoles();
@@ -76,4 +76,3 @@ public class AdminController {
         return "redirect:/admin/";
     }
 }
-

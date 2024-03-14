@@ -13,13 +13,13 @@ public class Role {
     private Integer id;
     @Column(name = "name_role")
     private String name;
+    @Transient
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
 
     }
-
 
     public Set<User> getUsers() {
         return users;
@@ -41,7 +41,6 @@ public class Role {
         this.id = id;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,6 +57,8 @@ public class Role {
     public int hashCode() {
         return Objects.hash(id, name);
     }
+
+
 }
 
 

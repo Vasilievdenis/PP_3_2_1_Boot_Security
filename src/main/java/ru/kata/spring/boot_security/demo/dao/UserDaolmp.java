@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 @Repository
 public class UserDaolmp implements UserDao {
 

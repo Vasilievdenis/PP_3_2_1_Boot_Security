@@ -14,13 +14,13 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "lastname")
     private String lastname;
     @Column(name = "age")
-    private int age;
+    private Integer age;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -53,36 +53,6 @@ public class User {
         this.id = id;
     }
 
-
-    public String getPassword() {
-        return password;
-    }
-
-
-    public String getUsername() {
-        return name;
-    }
-
-
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getName() {
         return name;
@@ -124,6 +94,17 @@ public class User {
         return roles;
     }
 
+    public String getUsername() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -146,4 +127,6 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, age, password, email, lastname, roles);
     }
+
+
 }

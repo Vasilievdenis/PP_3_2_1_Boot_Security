@@ -34,24 +34,25 @@ public class CustomUserDetails extends User implements UserDetails {
         return super.getId();
     }
 
+
     @Override
     public boolean isAccountNonExpired() {
-        return super.isAccountNonExpired();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return super.isAccountNonLocked();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return super.isCredentialsNonExpired();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return super.isEnabled();
+        return true;
     }
 
     @Override

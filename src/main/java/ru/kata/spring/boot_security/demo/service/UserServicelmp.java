@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ public class UserServicelmp implements UserService {
 
 
     @Autowired
-    public UserServicelmp(UserDao userDao, PasswordEncoder passwordEncoder) {
+    public UserServicelmp(UserDao userDao, @Lazy PasswordEncoder passwordEncoder) {
 
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
@@ -46,8 +47,13 @@ public class UserServicelmp implements UserService {
 
     @Override
     public void updateUser(User user) {
+        User userFrom = userDao.findByUserName(user.getName());
+        if (user.getPassword() == "") {
+            user.setPassword(userFrom.getPassword());
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userDao.updateUser(user);
-
     }
 
     @Override
