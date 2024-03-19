@@ -1,10 +1,13 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@Getter
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -18,23 +21,10 @@ public class Role {
     private Set<User> users;
 
     public Role() {
-
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String setName(String name) {
         return this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public void setId(Integer id) {
@@ -57,8 +47,4 @@ public class Role {
     public int hashCode() {
         return Objects.hash(id, name);
     }
-
-
 }
-
-

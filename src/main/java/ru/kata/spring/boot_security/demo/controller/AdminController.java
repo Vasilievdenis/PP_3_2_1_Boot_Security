@@ -28,7 +28,6 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-
     @GetMapping(value = "/")
     public String getUsers(ModelMap model, Principal principal) {
         User user = userService.findByUserName(principal.getName());
@@ -49,14 +48,12 @@ public class AdminController {
 
     @PostMapping("/")
     public String addUser(@ModelAttribute("user") @Valid User user, ModelMap model) {
-        model.addAttribute("roles", roleService.getRoles());
-        userService.addUser(user);
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.updateUser(user);
+        model.addAttribute("roles", roleService.getRoles());
+        userService.addUser(user);
         return "redirect:/admin/";
     }
-
 
     @GetMapping("/{id}/update")
     public String getEditUserForm(Model model, @PathVariable("id") Integer id) {

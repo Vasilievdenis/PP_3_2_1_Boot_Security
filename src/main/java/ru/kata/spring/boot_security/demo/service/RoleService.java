@@ -6,10 +6,5 @@ import java.util.Set;
 public interface RoleService {
     Set<Role> getRoles();
     Set<Role> findById(Integer id);
-
     void addRole(Role role);
-
-
 }
-
-

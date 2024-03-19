@@ -16,10 +16,8 @@ public class UserServicelmp implements UserService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
 
-
     @Autowired
     public UserServicelmp(UserDao userDao, @Lazy PasswordEncoder passwordEncoder) {
-
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
@@ -27,13 +25,11 @@ public class UserServicelmp implements UserService {
     @Transactional(readOnly = true)
     @Override
     public Set<User> getUsers() {
-
         return userDao.getUsers();
     }
 
     @Transactional(readOnly = true)
     @Override
-
     public User getUser(Integer id) {
         return userDao.getUser(id);
     }
@@ -41,9 +37,7 @@ public class UserServicelmp implements UserService {
     @Override
     public void addUser(User user) {
         userDao.addUser(user);
-
     }
-
 
     @Override
     public void updateUser(User user) {
@@ -59,7 +53,6 @@ public class UserServicelmp implements UserService {
     @Override
     public void removeUser(Integer id) {
         userDao.removeUser(id);
-
     }
 
     @Override

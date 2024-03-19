@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
-
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -9,6 +10,8 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
 public class User {
@@ -33,9 +36,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-
     public User() {
-
     }
 
     public User(String name, String lastname, int age, String email) {
@@ -45,65 +46,8 @@ public class User {
         this.email = email;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
     public String getUsername() {
         return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @Override
@@ -120,13 +64,10 @@ public class User {
         if (!email.equals(user.email)) return false;
         if (!password.equals(user.password)) return false;
         return roles.equals(user.roles);
-
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, age, password, email, lastname, roles);
     }
-
-
 }

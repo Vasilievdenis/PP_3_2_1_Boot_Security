@@ -15,7 +15,6 @@ public class RoleDaolmp implements RoleDao {
 
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
-
         this.entityManager = entityManager;
     }
 

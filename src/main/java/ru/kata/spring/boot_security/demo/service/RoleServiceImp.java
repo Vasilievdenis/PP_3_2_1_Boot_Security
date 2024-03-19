@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import java.util.Set;
 
 @Service
+@Transactional
 public class RoleServiceImp implements RoleService {
     private final RoleDao roleDao;
 
@@ -17,7 +18,6 @@ public class RoleServiceImp implements RoleService {
     public RoleServiceImp(RoleDao roleDao) {
         this.roleDao = roleDao;
     }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -34,6 +34,4 @@ public class RoleServiceImp implements RoleService {
     public void addRole(Role role) {
         roleDao.addRole(role);
     }
-
-
 }

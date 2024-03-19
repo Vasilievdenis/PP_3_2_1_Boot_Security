@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.Init;
+package ru.kata.spring.boot_security.demo.init;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -16,7 +16,6 @@ import java.util.Set;
 
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent> {
-
 
     private final RoleServiceImp roleService;
     private final PasswordEncoder passwordEncoder;

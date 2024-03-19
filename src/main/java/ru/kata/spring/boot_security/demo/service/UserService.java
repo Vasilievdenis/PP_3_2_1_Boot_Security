@@ -7,14 +7,9 @@ import java.util.Set;
 
 public interface UserService {
     Set<User> getUsers();
-
     User getUser(Integer id);
-
     void addUser(User user);
-
     void updateUser(User user);
-
     void removeUser(Integer id);
-
     User findByUserName(String name);
 }

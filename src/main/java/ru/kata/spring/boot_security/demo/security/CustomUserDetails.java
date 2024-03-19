@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Component
 public class CustomUserDetails extends User implements UserDetails {
 
-
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
         return getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
@@ -33,7 +32,6 @@ public class CustomUserDetails extends User implements UserDetails {
     public Integer getId() {
         return super.getId();
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

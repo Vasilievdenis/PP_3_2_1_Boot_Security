@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Repository
 public class UserDaolmp implements UserDao {
 
-
     private EntityManager entityManager;
 
     @PersistenceContext
@@ -21,13 +20,10 @@ public class UserDaolmp implements UserDao {
         this.entityManager = entityManager;
     }
 
-
     @Override
     public Set<User> getUsers() {
-
         return entityManager.createQuery("from User", User.class).getResultStream().collect(Collectors.toSet());
     }
-
 
     @Override
     public User getUser(Integer id) {
@@ -35,25 +31,20 @@ public class UserDaolmp implements UserDao {
         return entityManager.find(User.class, id);
     }
 
-
     @Override
     public void addUser(User user) {
         entityManager.persist(user);
-
     }
-
 
     @Override
     public void updateUser(User user) {
         entityManager.merge(user);
-
     }
 
     @Override
     public void removeUser(Integer id) {
         entityManager.remove(getUser(id));
     }
-
 
     @Override
     public User findByUserName(String name) {
@@ -64,5 +55,4 @@ public class UserDaolmp implements UserDao {
         }
         return user;
     }
-
 }
