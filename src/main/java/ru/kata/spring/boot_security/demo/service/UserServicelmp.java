@@ -37,7 +37,6 @@ public class UserServicelmp implements UserService {
 
     @Override
     public void addUser(User user) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.addUser(user);
     }
