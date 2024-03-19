@@ -48,8 +48,6 @@ public class AdminController {
 
     @PostMapping("/")
     public String addUser(@ModelAttribute("user") @Valid User user, ModelMap model) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         model.addAttribute("roles", roleService.getRoles());
         userService.addUser(user);
         return "redirect:/admin/";
