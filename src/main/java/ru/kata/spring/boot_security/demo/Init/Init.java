@@ -16,19 +16,15 @@ import java.util.Set;
 
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent> {
-
     private final RoleServiceImp roleService;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
-
     @Autowired
     public Init(RoleServiceImp roleService, UserService userService, PasswordEncoder passwordEncoder) {
         this.roleService = roleService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
-
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         Role userRole = new Role();
